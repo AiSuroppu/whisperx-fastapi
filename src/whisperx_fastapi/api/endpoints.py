@@ -95,6 +95,7 @@ async def transcribe_endpoint(
                 interpolate_method=params.interpolate_method,
                 return_char_alignments=params.return_char_alignments,
             )
+            aligned_result["language"] = lang_code
             return aligned_result
         finally:
             # 4. CRITICAL: Always restore the original pipeline settings for the next request
@@ -155,6 +156,7 @@ async def align_endpoint(
                 interpolate_method=params.interpolate_method,
                 return_char_alignments=params.return_char_alignments,
             )
+            aligned_result["language"] = params.language
             return aligned_result
         finally:
             # Clean up the temporary audio file
