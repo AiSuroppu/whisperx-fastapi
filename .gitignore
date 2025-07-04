@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Environment & Configuration
+.env
+
+# Cache files
+.cache
+
+# IDE
+.vscode/
+.idea/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Logs
+logs/

@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "whisperx-fastapi"
+version = "1.0.0"
+description = "A high-performance API for ASR, alignment, and diarization using whisperx."
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Ai Suroppu" },
+]
+
+# Core dependencies for the API wrapper itself.
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic-settings",
+    "ffmpeg-python",
+    "python-multipart",
+    "loguru",
+    "whisperx[all] @ git+https://github.com/m-bain/whisperx.git",
+]
+
+[project.optional-dependencies]
+# Dependencies for running tests and development
+dev = [
+    "pytest",
+    "httpx", # For async testing of the FastAPI app
+]
+
+[project.scripts]
+# You can define a command-line entry point if needed later.
+# whisperx-api = "whisperx_fastapi.main:run"
+
+[project.urls]
+Homepage = "https://github.com/AiSuroppu/whisperx-fastapi"
+Repository = "https://github.com/AiSuroppu/whisperx-fastapi"
+
+# This section tells setuptools where to find your Python package.
+[tool.setuptools.packages.find]
+where = ["src"]
