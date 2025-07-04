@@ -24,11 +24,12 @@ class TranscriptionRequest(BaseModel):
     vad_onset: float = Field(0.5, description="VAD onset threshold for speech detection.")
     vad_offset: float = Field(0.363, description="VAD offset threshold for speech detection.")
 
-    # ASR Decoding Options (focused on the most impactful parameters)
+    # ASR Decoding Options
     temperatures: Union[float, List[float]] = Field([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], description="Temperature for sampling. Can be a single float or a list for fallback.")
     beam_size: int = Field(5, description="Primary control for speed vs. accuracy. Higher values are more accurate but slower.")
     initial_prompt: Optional[str] = Field(None, description="Optional text to provide as context to the model.")
     suppress_numerals: bool = Field(False, description="If True, suppress numeric and symbol tokens. A high-level alternative to 'suppress_tokens'.")
+    hotwords: Optional[str] = Field(None, description="Hotwords to provide the model.")
     
     # Alignment Options
     interpolate_method: str = Field("nearest", description="Method for interpolating timestamps: 'nearest', 'linear', 'pad'.")

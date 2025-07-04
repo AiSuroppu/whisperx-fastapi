@@ -68,6 +68,7 @@ async def transcribe_endpoint(
                 "best_of": params.beam_size, # Keep best_of same as beam_size
                 "temperatures": tuple(temperatures),
                 "initial_prompt": params.initial_prompt,
+                "hotwords": params.hotwords
             }
             pipeline.options = replace(original_options, **request_asr_options)
             pipeline._vad_params["vad_onset"] = params.vad_onset
