@@ -29,7 +29,7 @@ router = APIRouter()
 )
 async def transcribe_endpoint(
     file: UploadFile = File(...),
-    req_json: str = Form(alias="params", default=TranscriptionRequest().model_dump_json()),
+    req_json: str = Form(..., alias="params"),
 ):
     """
     Transcribes audio, performs alignment, and returns detailed segment and word-level
@@ -118,7 +118,7 @@ async def transcribe_endpoint(
 )
 async def align_endpoint(
     file: UploadFile = File(...),
-    req_json: str = Form(alias="params", default=ForcedAlignmentRequest(text_content="", language="en").model_dump_json()),
+    req_json: str = Form(..., alias="params"),
 ):
     """
     Performs forced alignment of a provided text transcript (ground truth) against

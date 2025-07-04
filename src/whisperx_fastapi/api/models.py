@@ -40,7 +40,7 @@ class TranscriptionRequest(BaseModel):
 
 class ForcedAlignmentRequest(BaseModel):
     """Parameters for a forced alignment request."""
-    text_content: str = Field(..., description="The ground-truth text to align against the audio.")
+    text_content: str = Field(..., min_length=1, description="The ground-truth text to align against the audio. Must not be empty.")
     language: str = Field(..., description="ISO 639-1 language code of the text.")
     
     # Alignment Options
