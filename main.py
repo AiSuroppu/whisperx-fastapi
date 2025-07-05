@@ -3,6 +3,7 @@ import uvicorn
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from pydantic import ValidationError
 from loguru import logger
 
 from whisperx_fastapi.api.endpoints import router as api_router
@@ -18,9 +19,18 @@ app = FastAPI(
 # --- Exception Handlers ---
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """Handles errors in request validation (e.g., multipart form data)."""
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content={"error": "Validation Error", "details": exc.errors()},
+        content={"error": "Request Validation Error", "details": exc.errors()},
+    )
+
+@app.exception_handler(ValidationError)
+async def pydantic_validation_exception_handler(request: Request, exc: ValidationError):
+    """Handles errors in Pydantic model validation from request bodies."""
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"error": "JSON Body Validation Error", "details": exc.errors()},
     )
 
 @app.exception_handler(Exception)

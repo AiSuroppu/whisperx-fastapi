@@ -15,6 +15,13 @@ class Settings(BaseSettings):
     CPU_THREADS: int = 4 # Number of threads for CPU execution
     WHISPER_BATCH_SIZE: int = 1 # Batch size for Whisper model
 
+    # Model Loading Strategy
+    # If True, models are loaded into VRAM on-demand for each request and offloaded
+    # afterwards. Ideal for shared GPU environments.
+    # If False (default), models are cached in VRAM for maximum performance.
+    ON_DEMAND_LOADING: bool = False
+    OFFLOAD_DEVICE: str = "cpu"
+
     # VAD Configuration
     VAD_METHOD: Literal["silero", "pyannote"] = "pyannote"
 

@@ -19,8 +19,6 @@ class ModelManager:
     def __init__(self, device: str = settings.DEVICE, compute_type: str = settings.COMPUTE_TYPE):
         self.device = device
         self.compute_type = compute_type
-        if settings.ASR_MODEL_SIZE:
-            self.get_whisper_model(settings.ASR_MODEL_SIZE)
 
     def get_whisper_model(self, model_size: str):
         """Loads and returns the ASR pipeline object."""
