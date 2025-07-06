@@ -17,7 +17,6 @@ from whisperx_fastapi.api.models import (
 )
 from whisperx_fastapi.core.config import settings
 from whisperx_fastapi.services.model_provider import model_provider, CachedModelProvider
-from whisperx_fastapi.services.model_manager import model_manager
 from whisperx_fastapi.services.srt_utils import generate_srt_from_segments, generate_srt_from_words
 from whisperx.audio import load_audio
 
@@ -283,7 +282,6 @@ async def health_check():
     try:
         if isinstance(model_provider, CachedModelProvider):
             status_info["mode"] = "cached"
-            status_info["default_asr_model_loaded"] = model_manager.is_model_loaded("asr", settings.ASR_MODEL_SIZE)
         else:
             status_info["mode"] = "on-demand"
         return JSONResponse(status_code=200, content=status_info)
